@@ -70,23 +70,23 @@ class Trie:
 
 
 '''Parse text file and apply to Trie'''
-def parse_file(file):
+def build_model(file_name):
 
 
     #Open file to var so it can be closed
-    word_file = open(file)
+    file_obj = open(file_name)
 
     #Read file and split values on tab
-    word_obj = csv.reader(word_file, delimiter="\t", skipinitialspace=True)
+    row_list = csv.reader(file_obj, delimiter="\t", skipinitialspace=True)
 
     word_trie = Trie()
 
-    for i, line in enumerate(word_obj):
-        if i >0 : #Pull out header
-            word_trie.add_item(line[1],line[3])    
+    for index, row in enumerate(row_list):
+        if index > 0 : #Ignore header colum
+            word_trie.add_item(row[1],row[3])    
 
 
-    word_file.close()
+    file_obj.close()
 
     return word_trie
  

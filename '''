@@ -1,0 +1,96 @@
+'''
+holding place for work in progress on c9
+'''
+
+#Word - str
+#Freq - num 
+
+# split out word & freq based on tabs and add to list
+# sorting list by letter and frequencies
+# generate a dict of lett combo as keys - first 1 letter deep and then grown
+# generate a list of values holding highest freq word first and so forth (highest freq word in index 0 )
+# limit on the size of list 20 (assuming keys are exhaustive)
+
+    # while line != '':
+    #     # root.add_item(line)
+    #     line = word_file.readline() # skip header
+    #     print line
+
+
+        def remove(self, s):
+        """Remove the string s from the Trie. 
+        Returns *True* if the string was a member."""
+        head, tail = s[0], s[1:]
+        if head not in self.root:
+            return False  # Not contained
+        node = self.root[head]
+        if tail:
+            return node.remove(tail)
+        else:
+            del node
+            return True
+    
+    # word_list = []
+
+        # word_list.append((line[1],line[3]))
+    # word_list.pop(0) #remove header
+    # word_list.sort(key=lambda tup: tup[0]) #sorts list
+
+
+    
+# def main():
+#     alist = []
+
+#     word_trie = parse_file("../../frequencies.txt")
+
+#     # print word_trie.search("a", alist)
+
+#     # print "Input:",
+#     # input=raw_input()
+
+#     result = word_trie.search("a", alist)
+
+#     print sorted(result, key=lambda tup: int(tup[1]), reverse = True)
+
+
+# if __name__ == '__main__':
+#     main()
+
+# if __name__ == '__main__':
+
+    # if len(sys.argv) != 2:
+    #     print "Usage: ", sys.argv[0], "dictionary_file.txt"
+    #     sys.exit(2)
+        
+    # root  = fileparse(sys.argv[1])
+
+
+        //keyboard entry trigger 
+        var xTriggered = 0;
+        var response = $('.c9_msg').attr('value');
+
+        $("#target").keypress(function() {
+            xTriggered++;
+            console.log ("Handler for .keypress() called " + xTriggered + " time(s).");
+            $.ajax({
+                type: 'POST',
+                url: '/predict',
+                data: {response: response}
+            });
+        });
+        // var xTriggered = 0;
+
+        // $("#target").keyup(function() {
+        //     // xTriggered++;
+        //     // console.log ("Handler for .keyup() called " + xTriggered + " time(s).");
+        //     var response = $(this).val();
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: '/autocomplete',
+        //         data: {msg: response},
+        //         success: function(data){
+        //             //pass content for typeahead
+        //             var ta_data = data.split(" ");
+
+        //         }
+        // });

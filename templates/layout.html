@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!-- Layout page for reuse accross site -->
+<html>
+
+    <head>
+        <title>Cloud 9</title>
+        <!-- apply if to cover when compiling Boostrap from the Customize page-->
+        <meta name = "viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+        <!-- responsive layout -->
+        <link rel="stylesheet" href="{{ url_for("static", filename="css/bootstrap-responsive.min.css") }}" media="screen" type="text/css">
+        <!-- defines all the styles for html elements -->
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+        
+        <style type="text/css">
+        html, body {margin:0; padding:0; width:100%; height:100%; overflow:hidden; text-align:left;}
+        #stealthy{position:absolute; z-index:1; width:100%; height:100%;}
+        </style>
+    </head>
+
+    <body>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                {% block body %} {% endblock %}
+            </div>
+        </div>
+    </body>
+
+
+</html>

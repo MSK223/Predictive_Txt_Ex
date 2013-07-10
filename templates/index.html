@@ -1,0 +1,44 @@
+<!-- C9 Index Page -->
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <div class="hero-unit">
+        <h2>Send a Text!</h2>
+        <p>Enter a text message to send a friend.<br>
+        As you type, suggestions will be made in a drop down list.</br>
+        If the suggestion is wrong, just ignore them and keep typing.</br>
+        If the suggestion is right, chose the option from the drop down list.</br>
+        When you've completed your message, submit.
+
+        <form action="" method="POST" class="form-search">
+            <input type="text" name="pred_msg" placeholder="Enter message" class="san4 typeahead" autcomplete = "off" id="target">
+            <a role="button" class = "btn btn-primary btn-medium" href="#myModal" data-toggle="modal"> Send Msg </a>
+        </form>
+        {% include "success.html" %}
+    </div>
+        <!-- Load JQuery -->
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <!-- Bootstrap js-->
+        <script src="static/js/bootstrap.min.js"></script>
+        <!-- Typeahead -->
+        <script src="static/js/bootstrap-typeahead.js"></script>
+        <script>
+
+        // Enables predictive functionality 
+        $('.typeahead').typeahead({
+
+            source: function (typeahead, query) {
+                return $.post(
+                    '/autocomplete', 
+                    { msg: query }, 
+                    function (data) {
+                        return typeahead.process(data.split(" "));
+                    })
+            }
+        });
+
+
+    </script>
+
+{% endblock %}

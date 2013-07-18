@@ -6,6 +6,7 @@ app = Flask(__name__)
 app.debug = True
 
 
+# Build Trie on load only
 if True:
     ext = 'pickle'
     dump = pickle.dumps

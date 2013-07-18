@@ -1,19 +1,32 @@
-import os, time, pickle
+import os, time, pickle, json
 from flask import Flask, render_template, request, redirect
 import engine
 
 app = Flask(__name__)
 app.debug = True
 
-if os.path.exists('trie.out'):
-    f = open('trie.out', 'r')
-    trie = pickle.loads(f.read())
+
+if True:
+    ext = 'pickle'
+    dump = pickle.dumps
+    load = pickle.loads
+else:
+    # FIXME: needs custom JSONEncoder/Decoder
+    ext = 'json'
+    dump = json.dumps
+    load = json.loads
+
+fn = "trie.%s" % ext
+
+if os.path.exists(fn):
+    f = open(fn, 'r')
+    trie = load(f.read())
     f.close()
 else:
     trie = engine.build_trie()
 
-    f = open('trie.out', 'wb')
-    f.write(pickle.dumps(trie))
+    f = open(fn, 'wb')
+    f.write(dump(trie))
     f.close()
 
 

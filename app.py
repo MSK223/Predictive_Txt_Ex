@@ -1,9 +1,21 @@
-import os
+import os, time, pickle
 from flask import Flask, render_template, request, redirect
 import engine
 
 app = Flask(__name__)
 app.debug = True
+
+if os.path.exists('trie.out'):
+    f = open('trie.out', 'r')
+    trie = pickle.loads(f.read())
+    f.close()
+else:
+    trie = engine.build_trie()
+
+    f = open('trie.out', 'wb')
+    f.write(pickle.dumps(trie))
+    f.close()
+
 
 #Index page
 @app.route('/', methods=['POST','GET'])
@@ -19,13 +31,13 @@ def autocomplete():
         txt_so_far = str(request.form['msg'])
     
     if txt_so_far:
-        predict = engine.predict(txt_so_far)
+        prediction = engine.predict(trie, txt_so_far)
     else:
-        predict = []
+        prediction = []
     
-    return ' '.join(predict)
+    return ' '.join(prediction)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(port=port)
 
